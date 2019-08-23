@@ -1,0 +1,174 @@
+#服务
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+
+debug: true
+# 日志配置
+logging:
+  config: classpath:conf/logback-spring.xml
+  level:
+    org.springframework.boot.autoconfigure: error
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+#    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+    templates: error
+#    com.wang: error
+#    root: WARN
+
+
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    config-location: classpath:/conf/mybatis-config.xml
+#  mapper-locations: classpath:/mapper/*
+  # 前面的 - 不要删除
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+#自定义的realm
+#myRealm: MyRealm
+# 注入自定义的realm
+#securityManager:
+#  realms: $myRealm
+
+
+
+people:
+  name: wang
+  password: 123
+
+spring:
+
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss
+#    deserialization:
+#      #允许对象忽略json中不存在的属性
+#      fail_on_unknown_properties: false
+#    serialization:
+#
+#      #格式化输出
+#      indent_output: true
+#      #忽略无法转换的对象
+#      fail_on_empty_beans: false
+#    #设置空如何序列化 NON_DEFAULT  NON_EMPTY   NON_NULL
+#    default-property-inclusion: NON_EMPTY
+#    parser:
+#          #允许出现特殊字符和转义符
+#          allow_unquoted_control_chars: true
+#          #允许出现单引号
+#          allow_single_quotes: true
+
+  devtools:
+    restart:
+      enabled: true
+#      additional-paths: src/main/java/com/wang
+#      exclude: WEB-INF/**
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+    pathmatch:
+      use-registered-suffix-pattern: true
+
+
+
+  freemarker:
+    cache: false
+    charset: utf-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    suffix: .html
+    template-loader-path: classpath:/templates/
+  resources:
+    static-locations: classpath:/templates/
+  cache:
+    ehcache:
+      config: classpath:conf/ehcache.xml
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    username: admin
+    password: admin
+  redis:
+    host: 192.168.99.100
+    port: 6379
+    database: 0
+    password:
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 10
+        max-wait: -1
+        max-idle: 10
+        min-idle: 1
+
+  data:
+    solr:
+      host: http://192.168.99.100:8983/solr/mycore
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: 192.168.99.100:9300
+      cluster-name: docker-cluster
+#      properties: .es.set.netty.runtime.available.processors=false
+    mongodb:
+      host: 192.168.99.100
+      port: 27017
+      database: admin
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/web?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000    # 配置获取连接等待超时的时间
+      timeBetweenEvictionRunsMillis: 60000    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      minEvictableIdleTimeMillis: 300000      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true    # 打开PSCache，并且指定每个连接上PSCache的大小
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,logback    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      use-global-data-source-stat: true
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      stat-view-servlet:    # 配置监控服务器
+        login-username: admin
+        login-password: admin
+        reset-enable: false
+        url-pattern: /druid/*
+        #allow:     # 添加IP白名单
+        #deny:      # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
+      web-stat-filter:
+        url-pattern: /*     # 添加过滤规则
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"     # 忽略过滤格式
+  jpa:
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
