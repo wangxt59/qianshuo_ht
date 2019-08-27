@@ -1,6 +1,5 @@
 package com.qianshuo.controller;
 
-import com.qianshuo.pojo.Admin;
 import com.qianshuo.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -92,7 +89,7 @@ public class LoginController {
 
 //        return "处理登录";
         if (isAuthenticated1){
-            return new ModelAndView("index");
+            return new ModelAndView("common");
         }else {
             return new ModelAndView("pages/login",returnMap);
         }

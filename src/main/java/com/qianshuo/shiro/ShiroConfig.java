@@ -67,9 +67,10 @@ public class ShiroConfig {
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
 //        shiroFilterFactoryBean.setLoginUrl("/userLogin");
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        System.out.println("shirFilter");
+        shiroFilterFactoryBean.setLoginUrl("login.do");
         // 登录成功后要跳转的链接,建议不配置,shiro认证成功自动到上一个请求路径
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+//        shiroFilterFactoryBean.setSuccessUrl("/index");
         // 未授权界面,指定没有权限操作时跳转页面
 //        shiroFilterFactoryBean.setUnauthorizedUrl("/login");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
@@ -100,7 +101,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/login.html");
+        shiroFilterFactoryBean.setLoginUrl("/index.html");
         shiroFilterFactoryBean.setLoginUrl("/v1/toLoginPage");
 
 

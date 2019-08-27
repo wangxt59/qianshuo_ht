@@ -50,10 +50,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/index").setViewName("pages/login");
+        registry.addViewController("/").setViewName("index");
     }
 
-
+//    拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         System.out.println("进入拦截器");
@@ -71,7 +71,7 @@ public class WebConfig implements WebMvcConfigurer {
     public ServletRegistrationBean servletRegistrationBean(DispatcherServlet dispatcherServlet) {
         ServletRegistrationBean<DispatcherServlet> servletServletRegistrationBean = new ServletRegistrationBean<>(dispatcherServlet);
         servletServletRegistrationBean.addUrlMappings("*.do");
-        servletServletRegistrationBean.addUrlMappings("/index");
+        servletServletRegistrationBean.addUrlMappings("/");
 //        servletServletRegistrationBean.addUrlMappings("/**","/");
 
         servletServletRegistrationBean.addUrlMappings("*.jpg","*.png","*.js","*.css","*.woff","*.woff2","*.ttf");
